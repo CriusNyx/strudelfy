@@ -43,5 +43,5 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           artifacts: "out/*"
-          bodyFile: "README.md",
+          bodyFile: "README.md"
           draft: true
