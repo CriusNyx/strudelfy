@@ -1,7 +1,19 @@
 {
+  "name": "strudelfy",
+  "author": "CriusNyx <rjreynoldsw@gmail.com>",
+  "version": "0.0.1",
+  "description": "Tool to autogenerate strudel.json files",
+  "homepage": "https://github.com/CriusNyx/strudelfy",
+  "license": "GPL-3.0",
   "tasks": {
-    "once": "deno run main.ts",
-    "build": "deno compile --allow-read --allow-write -o out/strudelfy main.ts"
+    "once": "deno run --allow-read --allow-write --allow-env main.ts",
+    "build": "deno compile --allow-read --allow-write --allow-env",
+    "build-all": "deno run build-win; deno run build-mac; deno run build-mac-arm; deno run build-linux; deno run build-linux-arm",
+    "build-win": "deno run build --target x86_64-pc-windows-msvc -o out/win/strudelfy main.ts",
+    "build-mac": "deno run build --target x86_64-apple-darwin -o out/mac/strudelfy main.ts",
+    "build-mac-arm": "deno run build --target aarch64-apple-darwin -o out/mac-arm/strudelfy main.ts",
+    "build-linux": "deno run build --target x86_64-unknown-linux-gnu -o out/linux/strudelfy main.ts",
+    "build-linux-arm": "deno run build --target aarch64-unknown-linux-gnu -o out/linux-arm/strudelfy main.ts"
   },
   "imports": {
     "@commander-js/extra-typings": "npm:@commander-js/extra-typings@^14.0.0",

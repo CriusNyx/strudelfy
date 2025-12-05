@@ -10,10 +10,19 @@ if (import.meta.main) {
 }
 
 function main() {
-  const parser = program.argument("<path>").argument(
+  const parser = program.name("strudelfy").argument(
+    "<path>",
+    "The path to folder you want to strudelfy. Use . for the current folder.",
+  ).argument(
     "<base>",
     "This should be the URL to your github repo.",
-  );
+  ).description("Create a strudel.json file for the specified path.")
+    .addHelpText(
+      "after",
+      "\nExample:" +
+        "\n\tstrudelfy . https://github.com/Username/Repo" +
+        "\n\tstrudelfy mySampleFolder https://github.com/UserName/Repo",
+    );
 
   const cli = parser.parse();
 
