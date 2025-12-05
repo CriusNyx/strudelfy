@@ -1,5 +1,4 @@
 {
-  "name": "strudelfy",
   "author": "CriusNyx <rjreynoldsw@gmail.com>",
   "version": "0.0.1",
   "description": "Tool to autogenerate strudel.json files",
