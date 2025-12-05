@@ -1,0 +1,47 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# This workflow will install Deno then run `deno lint` and `deno test`.
+# For more information see: https://github.com/denoland/setup-deno
+
+name: Release
+
+on:
+  push:
+    tags:
+    - '*'
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        # uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
+        with:
+          deno-version: v1.x
+
+      - name: Run tests
+        run: deno test -A
+
+      - name: Build Binaries
+        run: deno run build-all
+
+      - name: zip Binaries
+        run: "cd out; zip linux.zip linux/*; zip linux-arm.zip linux-arm/*; zip mac.zip mac/*; zip mac-arm.zip mac-arm/*; zip win.zip win/*"
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "out/*"
+          bodyFile: "README.md",
+          draft: true
