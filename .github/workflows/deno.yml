@@ -9,13 +9,6 @@
 name: Release
 
 on:
-  workflow_dispatch:
-    inputs:
-      release_tag:
-        description: "Select the release tag to deploy (auto-updated daily)"
-        required: true
-        type: choice
-        options: []  # Will be populated dynamically!
   push:
     tags:
     - '*'
